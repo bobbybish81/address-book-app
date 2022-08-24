@@ -1,0 +1,154 @@
+body {
+    color: black;
+    height: 100vh;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    background-color: #e9eaec;
+    font-family: 'Caveat', cursive;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: #e9eaec;
+    margin: 0;
+    padding: 0;
+
+}
+
+.containerElement {
+    width: 75%;
+    height: 90%;
+    margin: 20px auto 0 auto;
+    display: inline-flex;
+}
+
+.header {
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+    text-align: center;
+    width: 60%;
+    margin: 20px auto;
+}
+
+.bookElement, .formElement {
+    width: 50%;
+    height: 100%;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-image: url('book2.png');
+    background-size: cover;
+    border-bottom-right-radius: 20px;
+}
+
+.formElement {
+    background-image: url('book1.png');
+    background-size: cover;
+}
+
+.listElement {
+    width: 85%;
+    margin: auto;
+}
+
+.contact {
+    border-bottom: 1px solid #b9b9bb;
+    width: 95%;
+    height: 50px;
+    font-size: 14px;
+    color: #120a3d;
+    padding: 0;
+    margin: auto;
+}
+
+.contactText {
+    font-size: 1.25rem;
+}
+
+.post-it {
+    width: 150px;
+    height: 150px;
+    background-image: url('postit.png');
+    background-size: cover;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.post-it:hover {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.post-it:nth-of-type(1) {
+    margin-top: 75px;
+}
+
+form {
+    height: 80%;
+    width: 80%;
+    position: relative;
+    top: -600px;
+    background-color: #e9eaec;
+    border: 1px solid #b9b9bb;
+    margin: auto;
+    border-radius: 20px;
+    display: grid;
+    justify-content: space-around;
+}
+
+.formHeader {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    height: 50px;
+    font-size: 2rem;
+}
+
+input {
+    height: 30px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #b9b9bb;
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.buttonDiv {
+    display: grid;
+}
+
+#submitButton, #cancelButton {
+    height: 30px;
+    width: 50%;
+    background-color: #e0d3c2;
+    border-radius: 10px;
+    border: 1px solid #b9b9bb;
+    font-size: 15px;
+    margin: auto;
+}
+
+#cancelButton {
+    width: 30%;
+    background-color: #ecd0c0;
+    margin-bottom: 50px;
+}
+
+#deleteForm input {
+    width: 300px;
+}
+
+#submitButton:hover, #cancelButton:hover {
+    background-color: #c6b59f;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#cancelButton:hover {
+    background-color: #e8c2ac;
+}
