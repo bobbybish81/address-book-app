@@ -36,7 +36,7 @@ main {
 .bookElement, .formElement {
     width: 50%;
     height: 100%;
-    display: block;
+    display: inline-block;
     align-items: center;
     justify-content: center;
     background-image: url('book2.png');
@@ -57,14 +57,18 @@ main {
 .contact {
     border-bottom: 1px solid #b9b9bb;
     width: 95%;
-    height: 50px;
+    height: 42px;
     font-size: 14px;
     color: #120a3d;
-    padding: 0;
+    padding: 2px 0;
     margin: auto;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .contactText {
+    padding: 0;
     font-size: 1.25rem;
 }
 
@@ -92,14 +96,16 @@ main {
 form {
     height: 80%;
     width: 80%;
-    position: relative;
-    top: -600px;
     background-color: #e9eaec;
     border: 1px solid #b9b9bb;
-    margin: auto;
+    margin: 75px auto;
     border-radius: 20px;
-    display: grid;
-    justify-content: space-around;
+}
+
+.updateForm, .deleteForm {
+    height: 50%;
+    margin: 150px auto;
+    justify-content: center;
 }
 
 .formHeader {
@@ -112,43 +118,40 @@ form {
 
 input {
     height: 30px;
-    width: 100%;
+    width: 80%;
     border-radius: 10px;
     border: 1px solid #b9b9bb;
     font-size: 15px;
     padding-left: 10px;
+    margin: auto;
 }
 
 .buttonDiv {
     display: grid;
 }
 
-#submitButton, #cancelButton {
+.submitButton, .cancelButton {
     height: 30px;
     width: 50%;
     background-color: #e0d3c2;
     border-radius: 10px;
     border: 1px solid #b9b9bb;
     font-size: 15px;
-    margin: auto;
+    margin: 20px auto;
 }
 
-#cancelButton {
+.cancelButton {
     width: 30%;
     background-color: #ecd0c0;
     margin-bottom: 50px;
 }
 
-#deleteForm input {
-    width: 300px;
-}
-
-#submitButton:hover, #cancelButton:hover {
-    background-color: #c6b59f;
+.submitButton:hover, .cancelButton:hover {
+    background-color: #e6f7dd;
     cursor: pointer;
     font-size: 16px;
 }
 
-#cancelButton:hover {
+.cancelButton:hover {
     background-color: #e8c2ac;
 }

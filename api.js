@@ -35,7 +35,7 @@ const db = [
     id: 3,
     name: 'James Davis',
     address: '12 High Grove',
-    city: 'London',
+    city: 'High Wycombe',
     email: 'james@yahoo.com',
     telNo: '+442087915236'
   },
@@ -44,8 +44,8 @@ const db = [
     name: 'Mark Parsons',
     address: '5 Hangleton Way',
     city: 'Littlehampton',
-    email: 'markparsons@hotmail.com',
-    telNo: '+441793584362'
+    email: 'mark@hotmail.com',
+    telNo: '+441793584362',
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const db = [
     address: '62 Sheldale Crescent',
     city: 'Portsmouth',
     email: 'oliver@disney.com',
-    telNo: '+441803456921'
+    telNo: '+441803456921',
   }
 ];
 
@@ -67,14 +67,27 @@ app.get('/api/addressbook', (req, res) => {
 });
 
 app.get('/api/addressbook/:name', (req, res) => {
-  const contact = db.find(contact => contact.name == req.params.name);
+  const contactIndex = db.findIndex(contact => contact.name == req.params.name);
+  const contact = db[contactIndex];
   return contact ?
-    res.json(contact) :
+    res
+    .json(contact)
+    .status(200) :
     res.status(404).end(); // condition ? truthy-part : falsy-part
 });
 
 app.post('/api/addressbook', (req, res) => {
-    const newContact = {
+  const contact = db.findIndex(contact => contact.name == req.body.name);
+  if (db.length >= 10 && contact < 0) {
+    res
+      .status(404).end(); // address book full
+  };
+  if (db.length < 10 && contact >= 0) {
+    res
+    .status(400).end(); // contact already exists
+  };
+  if (db.length < 10 && contact < 0) {
+  const newContact = {
     id: db.length + 1,
     name: req.body.name,
     address: req.body.address,
@@ -84,22 +97,26 @@ app.post('/api/addressbook', (req, res) => {
   };
   db.push(newContact);
   res
-    .status(201)
-    .setHeader('location', `/api/addressbook/${newContact.id}`)
-    .json(newContact);
+    .status(201).end();
+  };
 });
 
 app.delete('/api/addressbook/:name', (req, res) => {
-  const contactDelete = db.findIndex(contact => contact.name == req.params.name);
-    return db.splice(contactDelete, 1) ?
-      res
+  const contactIndex = db.findIndex(contact => contact.name == req.params.name);
+  if (contactIndex >= 0) {
+    db.splice(contactIndex, 1)
+    res
       .json(db)
-      .status(204):
-      res.status(404).end(); // condition ? truthy-part : falsy-part
+      .status(204);
+  } else {
+    res
+      .status(404)
+      .end();
+  };
 });
 
-app.patch('/api/addressbook/:name', (req, res) => {
-  const index = db.findIndex(contact => contact.name == contact.params.name);
+app.patch('/api/addressbook/:id', (req, res) => {
+  const index = db.findIndex(contact => contact.id == req.params.id);
     db[index].name = req.body.name;
     db[index].address = req.body.address;
     db[index].city = req.body.city;
