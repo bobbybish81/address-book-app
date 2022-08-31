@@ -49,7 +49,7 @@ const db = [
   },
   {
     id: 5,
-    name: 'Oliver Whitby',
+    name: 'Olivier Whitby',
     address: '62 Sheldale Crescent',
     city: 'Portsmouth',
     email: 'oliver@disney.com',

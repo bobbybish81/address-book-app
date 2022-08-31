@@ -69,7 +69,7 @@ for(let i = 0; i < inputs.length; i++) {
     input.setAttribute('placeholder', `Enter ${placeholders[i]}`);
     input.setAttribute('maxlength', maxLength[i]);
     input.setAttribute('autocomplete', 'off');
-    input.setAttribute('required', '');
+    input.setAttribute('required', 'true');
     form.append(input);
     };
     formElement.append(form);
@@ -84,7 +84,7 @@ const createUpdateInputs = function(form) { // for pre patch and delete forms
     input.setAttribute('placeholder', `Enter ${placeholders[0]}`);
     input.setAttribute('maxlength', maxLength[0]);
     input.setAttribute('autocomplete', 'off');
-    input.setAttribute('required', '');
+    input.setAttribute('required', 'true');
     form.append(input);
     formElement.append(form);
 };
@@ -155,11 +155,9 @@ postFormButton.addEventListener('click', function(e) {
         .then(response => {
             if (response.status === 400) {
                 alert(`${formData.name} already exists in Address Book!`);
-            }
-            if (response.status === 404) {
+            } else if (response.status === 404) {
                 alert(`Could not add contact for ${formData.name}. Address Book is full!`);
-            }
-            if (response.status === 201) {
+            } else {
                 alert(`Contact for ${formData.name} added to Address Book!`);
             };
         })
@@ -229,20 +227,18 @@ updateFormButton.addEventListener('click', function(e) {
     fetch(`${url}/${updateFormInput.value}`)
     .then(response => response.json())
         .then(data => {
-            console.log(data);
             patchName.value = data.name;
             patchAddess.value = data.address;
             patchCity.value = data.city;
             patchEmail.value = data.email;
             patchTelNo.value = data.telNo;
             updateId = data.id;
-            console.log(updateId)
             updateForm.reset();
             updateForm.style.display = 'none';
             patchForm.style.display = 'grid';
             patchFormButton.innerText = 'Update Contact';
             })
-    .catch(response => {
+    .catch(() => {
         alert(`Name not found in Address Book!`);
         updateForm.reset();
         updateForm.style.display = 'none';
@@ -271,19 +267,12 @@ patchFormButton.addEventListener('click', function(e) {
         }
     };
     fetch(`${url}/${updateId}`, postObject)
-    .then(response => {
+    .then(() => {
         alert(`Contact for ${formData.name} has been updated!`);
         patchForm.reset();
         patchForm.style.display = 'none';
         displayPostit();
         setTimeout( () => location.reload(), 500);
-    })
-    .catch(response => {
-            alert(`${formData.name} not found in Address Book!`);
-            alert(`Contact for ${formData.name} has been updated!`);
-            patchForm.reset();
-            patchForm.style.display = 'none';
-            displayPostit();
     })
 });
 patchFormCancelButton.addEventListener('click', function(e) {
@@ -329,8 +318,7 @@ deleteFormButton.addEventListener('click', function(e) {
         .then(response => {
             if (response.status === 404) {
                 alert(`${formData.name} not found in Address Book!`);
-            }
-            if (response.status === 204) {
+            } else {
                 alert(`Contact for ${formData.name} has been deleted!`);
             };
         })
